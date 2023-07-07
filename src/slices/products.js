@@ -12,7 +12,15 @@ export const retrieveProducts = createAsyncThunk(
 
     );
 
-    const ProductSlice = createSlice({
+export const deleteProduct = createAsyncThunk(
+      "products/delete",
+      async ({ id }) => {
+        await ProductsDataService.delete(id);
+        return { id };
+      }
+    );    
+
+const ProductSlice = createSlice({
         name: "products",
         initialState,
         extraReducers: {
@@ -20,6 +28,10 @@ export const retrieveProducts = createAsyncThunk(
             return [...action.payload];
           }
         },
+        [deleteProduct.fulfilled]: (state, action) => {
+          let index = state.findIndex(({ id }) => id === action.payload.id);
+          state.splice(index, 1);
+        },        
       });
 
 const { reducer } = ProductSlice;
