@@ -14,50 +14,30 @@ import EditIcon from '@mui/icons-material/Edit';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-import { retrieveProducts, deleteProduct, } from "../slices/products";
-import { truncate } from "../common/utils";
-import { withRouter } from '../common/with-router';
+import { retrieveProducts, deleteProduct, } from "../slices/products"; // data apis
+import { truncate } from "../common/utils";   //truncate text
+import { withRouter } from '../common/with-router'; //hack to support navigate issue
 
 // render all product lists in a table view
 class ProductsList extends Component {
   constructor(props) {
-    super(props);
-    this.refreshData = this.refreshData.bind(this);
-    this.setActiveProduct = this.setActiveProduct.bind(this);
+    super(props);    
     this.confirmDelete = this.confirmDelete.bind(this);
-    this.removeProduct = this.removeProduct.bind(this);
 
-    this.state = {
-      currentProduct: null,
-      currentIndex: -1,
-    };
+    this.editProduct = this.editProduct.bind(this);
+    this.removeProduct = this.removeProduct.bind(this);
   }
+
   componentDidMount() {
     this.props
       .retrieveProducts();
   }
-  refreshData() {
-    this.setState({
-      currentProduct: null,
-      currentIndex: -1,
-    });
-  }
-  removeProduct(index){    
-    this.props
-      .deleteProduct({id: index})
-      .then(() => {debugger
-        //this.props.router.navigate('/');
-        this.refreshData()
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-  
+ 
+  // Confirmation box before deleting a product
   confirmDelete = (product, index) => {
     confirmAlert({
-      title: product.name,
-      message: 'Are you sure to delete.',
+      title: 'Are you sure to delete product',
+      message: product.name,
       buttons: [
         {
           label: 'Yes',
@@ -73,111 +53,64 @@ class ProductsList extends Component {
     });
   }
 
-  setActiveProduct(product, index) {
-    this.setState({
-      currentProduct: product,
-      currentIndex: index,
-    });
-  }        
+  // Remove product based on id: provided and fetch new data 
+  removeProduct(id){    
+    this.props
+      .deleteProduct({id: id})
+      .then(() => {
+        this.props.retrieveProducts();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  // Product edit navigation button
+  editProduct(product, index) {
+    this.props.router.navigate('/add');
+  }
+
+
   render() {   
-    const { currentProduct, currentIndex } = this.state;
     const { products } = this.props;    
       return (
-          <div className="list row">
-                  <div className="col-md-6">
-                    <h4>Tutorials List</h4>
-
-                    <ul className="list-group">
-                      {products &&
-                        products.map((product, index) => (
-                          <li
-                            className={
-                              "list-group-item " +
-                              (index === currentIndex ? "active" : "")
-                            }
-                            onClick={() => this.setActiveProduct(product, index)}
-                            key={index}
-                          >
-                            {product.name}
-                          </li>
-                        ))}
-                    </ul>
-
-                    <button
-                      className="m-3 btn btn-sm btn-danger"
-                      onClick={this.removeAllTutorials}
-                    >
-                      Remove All
-                    </button>
-                  </div>
-                  <div className="col-md-6">
-                    {currentProduct ? (
-                      <div>
-                        <h4>Tutorial</h4>
-                        <div>
-                          <label>
-                            <strong>Title:</strong>
-                          </label>{" "}
-                          {currentProduct.name}
-                        </div>
-                        <div>
-                          <label>
-                            <strong>Description:</strong>
-                          </label>{" "}
-                          {currentProduct.description}
-                        </div>
-
-                        <Link
-                          to={"/products/" + currentProduct.id}
-                          className="badge badge-warning"
-                        >
-                          Edit
-                        </Link>
-                      </div>
-                    ) : (
-                      <div>
-                        <br />
-                        <p>Please click on a Tutorial...</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-        //   <TableContainer component={Paper}>
-        //   <Table sx={{ minWidth: 650 }} aria-label="caption table">
-        //     <TableHead>
-        //       <TableRow>
-        //         <TableCell>Product ID</TableCell>
-        //         <TableCell align="right">Name</TableCell>
-        //         <TableCell align="right">Description</TableCell>
-        //         <TableCell align="right">Colour</TableCell>
-        //         <TableCell align="right">Size</TableCell>
-        //         <TableCell align="right">Actions</TableCell>
-        //       </TableRow>
-        //     </TableHead>
-        //     <TableBody>
-        //       {products.map((product, index) => (
-        //         <TableRow key={product.name}>
-        //           <TableCell align="right">{product.product_id}</TableCell>                  
-        //           <TableCell component="th" scope="row">
-        //             {product.name}
-        //           </TableCell>
-        //           <TableCell align="right">{ truncate(product.description) }</TableCell>
-        //           <TableCell align="right">{product.colour}</TableCell>
-        //           <TableCell align="right">{product.size}</TableCell>
-        //           <TableCell align="right">  
-        //             <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
-        //               <DeleteIcon />
-        //             </IconButton>
-        //             <IconButton aria-label="edit" color="primary" onClick={() => this.setActiveProduct(product, index)}>
-        //               <EditIcon />
-        //             </IconButton>                    
+          // Accessible table to list data in tabular form
+          <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="Product list">
+            <TableHead>
+              <TableRow>
+                <TableCell>Product ID</TableCell>
+                <TableCell align="right">Name</TableCell>
+                <TableCell align="right">Description</TableCell>
+                <TableCell align="right">Colour</TableCell>
+                <TableCell align="right">Size</TableCell>
+                <TableCell align="right">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {products.map((product, index) => (
+                <TableRow key={product.name}>
+                  <TableCell align="right">{product.product_id}</TableCell>                  
+                  <TableCell component="th" scope="row">
+                    {product.name}
+                  </TableCell>
+                  <TableCell align="right">{ truncate(product.description) }</TableCell> 
+                  <TableCell align="right">{product.colour}</TableCell>
+                  <TableCell align="right">{product.size}</TableCell>
+                  <TableCell align="right">  
+                    <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
+                      <DeleteIcon />
+                    </IconButton>
+                    <IconButton aria-label="edit" color="primary" onClick={() => this.editProduct(product, index)}>
+                      <EditIcon />
+                    </IconButton>                    
                                                    
-        //           </TableCell>
-        //         </TableRow>
-        //       ))}
-        //     </TableBody>
-        //   </Table>
-        // </TableContainer>        
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>        
       );
   }  
 }
