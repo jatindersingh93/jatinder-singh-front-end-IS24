@@ -12,9 +12,9 @@ export const retrieveProducts = createAsyncThunk(
   );
 
 export const createProduct = createAsyncThunk(
-    "tutorials/create",
-    async ({ name, description }) => {
-      const res = await ProductsDataService.create({ name, description });
+    "products/create",
+    async ({ product_id, name, description, colour, size }) => {
+      const res = await ProductsDataService.create({ product_id, name, description, colour, size });
       return res.data;
     }
   );

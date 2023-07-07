@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 
+
 import {
     FormControl,
     FormLabel,
@@ -10,14 +11,23 @@ import {
     FormGroup,
     Button,
     MenuItem,
-    Grid
+    Grid,
+    InputLabel
 } from '@mui/material';
 //import asyncValidate from './asyncValidate'
-
+import { 
+    ValidatorForm, TextValidator 
+    } from 'react-material-ui-form-validator';
 import { 
     retrieveProducts, 
     deleteProduct, 
     createProduct } from "../slices/products"; // data apis
+
+// type FormValues = {
+//     firstName: string
+//     lastName: string
+//     email: string
+//     }
 
 class AddProduct extends Component {
   constructor(props) {
@@ -25,15 +35,13 @@ class AddProduct extends Component {
     this.saveProduct = this.saveProduct.bind(this);
     this.newProduct = this.newProduct.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    //this.setFormValues ={}
-    this.formValues = {}
     this.state = {
       id: null,
       product_id: "",
       name: "",
       description: "",
       colour: "",
-      size: "",
+      size: undefined,
       };
     }
   //const [formValues, setFormValues] = useState(initialValues);
@@ -61,35 +69,46 @@ class AddProduct extends Component {
 
   newProduct(event) {
     event.preventDefault();
-    debugger
-    console.log('jatinder');
     const { product_id, name, description, colour, size } = this.state;   
+    debugger
     //console.log(formValues); 
-    this.setState({
-      id: null,
-      product_id: "",
-      name: "",
-      description: "",      
-      colour: "",
-      size: "",
-      });
-    }
-
-  handleInputChange(e) {
-    // console.log('jatinder')
-    // debugger
-    const { name, value } = e.target;
     // this.setState({
-    //     [name]: value,        
-    //     });    
-    this.setFormValues({
-        ...formValues,
-        [name]: value,
+    //   id: null,
+    //   product_id: product_id,
+    //   name: name,
+    //   description: description,      
+    //   colour: colour,
+    //   size: size,
+    //   });
+    
+    this.props
+      .createProduct({ product_id, name, description, colour, size })
+      .unwrap()
+      .then((data) => {
+        this.setState({
+          id: data.id,
+          product_id: data.product_id,
+          name: data.name,
+          description: data.publdescriptionshed,
+          colour: data.colour,
+          size: data.size,
+        });
+        console.log(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });      
+    }
+  // Handle input change and set values for state data
+  handleInputChange(e) {//debugger
+    const { name, value } = e.target;
+    this.setState({
+        [name]: value,        
         });
     }
 
 render() {
-    const [formValues, setFormValues] = useState(this.state);
+    //const [formValues, setFormValues] = useState(this.state);
     return (
         <>
         <form onSubmit={this.newProduct}>
@@ -100,6 +119,9 @@ render() {
                     name="product_id"
                     label="Product ID"
                     type="text"
+                    margin="dense"
+                    validators={['required']}
+                    errorMessages={['this field is required']}                    
                     onChange={this.handleInputChange}/>
                     </Grid>
                 <Grid item>
@@ -107,36 +129,48 @@ render() {
                       id="name"
                       name="name"
                       label="Name"
-                      type="text"/>
+                      type="text"
+                      margin="dense"
+                      onChange={this.handleInputChange}/>
                     </Grid>
                 <Grid item>
                     <TextField
                       id="description"
                       name="description"
                       label="Description"
-                      type="text"/>
+                      type="text"
+                      margin="dense"
+                      multiline
+                      minRows={4}
+                      maxRows={8}                      
+                      onChange={this.handleInputChange}/>
                     </Grid>
                 <Grid item>
                     <TextField
                       id="colour"
                       name="colour"
                       label="Colour"
-                      type="text"/>
+                      type="text"
+                      margin="dense"
+                      onChange={this.handleInputChange}/>
                     </Grid>                    
                 <Grid item>
-                    <FormControl>
+                    <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
                         <Select
-                            name="country">
-                            <MenuItem key="canada" value="Canada">
-                                Canada
+                            value={1}
+                            name="size"
+                            margin="dense"
+                            onChange={this.handleInputChange}>
+                            <MenuItem key="small" value={1}>
+                                Small
                             </MenuItem>
-                            <MenuItem key="japan" value="Japan">
-                                Japan
+                            <MenuItem key="medium" value={2}>
+                                Medium
                             </MenuItem>
-                            <MenuItem key="germany " value="Germany">
-                                Germany
+                            <MenuItem key="large" value={3}>
+                                Large
                             </MenuItem>
-                            </Select>
+                            </Select>                     
                         </FormControl>
                     </Grid>
                 <Grid item>

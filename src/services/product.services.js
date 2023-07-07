@@ -10,6 +10,7 @@ class ProductsDataService {
     }
 
   create(data) {
+    debugger
     return http.post("/products", data);
     }
 
