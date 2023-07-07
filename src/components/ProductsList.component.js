@@ -26,12 +26,12 @@ class ProductsList extends Component {
 
     this.editProduct = this.editProduct.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
-  }
+    }
 
   componentDidMount() {
     this.props
       .retrieveProducts();
-  }
+    }
  
   // Confirmation box before deleting a product
   confirmDelete = (product, index) => {
@@ -50,8 +50,8 @@ class ProductsList extends Component {
       closeOnEscape: true,
       closeOnClickOutside: true,
       keyCodeForClose: [8, 32],      
-    });
-  }
+      });
+    }
 
   // Remove product based on id: provided and fetch new data 
   removeProduct(id){    
@@ -63,61 +63,61 @@ class ProductsList extends Component {
       .catch((e) => {
         console.log(e);
       });
-  }
+    }
 
   // Product edit navigation button
   editProduct(product, index) {
     this.props.router.navigate('/add');
-  }
+    }
 
 
   render() {   
     const { products } = this.props;    
-      return (
-          // Accessible table to list data in tabular form
-          <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="Product list">
-            <TableHead>
-              <TableRow>
-                <TableCell>Product ID</TableCell>
-                <TableCell align="right">Name</TableCell>
-                <TableCell align="right">Description</TableCell>
-                <TableCell align="right">Colour</TableCell>
-                <TableCell align="right">Size</TableCell>
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {products.map((product, index) => (
-                <TableRow key={product.name}>
-                  <TableCell align="right">{product.product_id}</TableCell>                  
-                  <TableCell component="th" scope="row">
-                    {product.name}
-                  </TableCell>
-                  <TableCell align="right">{ truncate(product.description) }</TableCell> 
-                  <TableCell align="right">{product.colour}</TableCell>
-                  <TableCell align="right">{product.size}</TableCell>
-                  <TableCell align="right">  
-                    <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
-                      <DeleteIcon />
-                    </IconButton>
-                    <IconButton aria-label="edit" color="primary" onClick={() => this.editProduct(product, index)}>
-                      <EditIcon />
-                    </IconButton>                    
-                                                   
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>        
+    return (
+      // Accessible table to list data in tabular form
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="Product list">
+        <TableHead>
+          <TableRow>
+            <TableCell>Product ID</TableCell>
+            <TableCell align="right">Name</TableCell>
+            <TableCell align="right">Description</TableCell>
+            <TableCell align="right">Colour</TableCell>
+            <TableCell align="right">Size</TableCell>
+            <TableCell align="right">Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {products.map((product, index) => (
+            <TableRow key={product.name}>
+              <TableCell align="right">{product.product_id}</TableCell>                  
+              <TableCell component="th" scope="row">
+                {product.name}
+              </TableCell>
+              <TableCell align="right">{ truncate(product.description) }</TableCell> 
+              <TableCell align="right">{product.colour}</TableCell>
+              <TableCell align="right">{product.size}</TableCell>
+              <TableCell align="right">  
+                <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
+                  <DeleteIcon />
+                </IconButton>
+                <IconButton aria-label="edit" color="primary" onClick={() => this.editProduct(product, index)}>
+                  <EditIcon />
+                </IconButton>                    
+                                                
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      </TableContainer>        
       );
-  }  
-}
+    }  
+  }
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    };
   };
-};
 
 export default connect(mapStateToProps, { retrieveProducts, deleteProduct })(withRouter(ProductsList));

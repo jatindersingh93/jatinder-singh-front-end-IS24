@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ProductsList from './components/ProductsList.component'
+import AddProduct from "./components/add-product.component";
 
 
 class App extends Component {
@@ -31,10 +32,11 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<ProductsList/>} />
             <Route path="/products" element={<ProductsList/>} />
+            <Route path="/add" element={<AddProduct/>} />
           </Routes>
         </div>        
       </Router>
-    );
-  }
-}
+      );
+      }
+    }
 export default App;
