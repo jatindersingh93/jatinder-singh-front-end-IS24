@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import { connect } from "react-redux";
-
+import { confirmAlert } from 'react-confirm-alert';
 
 import {
     FormControl,
@@ -15,24 +15,17 @@ import {
     InputLabel
 } from '@mui/material';
 //import asyncValidate from './asyncValidate'
-import { 
-    ValidatorForm, TextValidator 
-    } from 'react-material-ui-form-validator';
+
 import { 
     retrieveProducts, 
     deleteProduct, 
     createProduct } from "../slices/products"; // data apis
 
-// type FormValues = {
-//     firstName: string
-//     lastName: string
-//     email: string
-//     }
+import { withRouter } from '../common/with-router'; //hack to support navigate issue
 
 class AddProduct extends Component {
   constructor(props) {
     super(props);
-    this.saveProduct = this.saveProduct.bind(this);
     this.newProduct = this.newProduct.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
@@ -44,42 +37,10 @@ class AddProduct extends Component {
       size: undefined,
       };
     }
-  //const [formValues, setFormValues] = useState(initialValues);
-
-  saveProduct() {
-    const { title, description } = this.state;
-
-    this.props
-      .createProduct({ title, description })
-      .unwrap()
-      .then((data) => {
-        this.setState({
-          id: data.id,
-          title: data.title,
-          description: data.description,
-          published: data.published,
-          submitted: true,
-        });
-        console.log(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
 
   newProduct(event) {
     event.preventDefault();
-    const { product_id, name, description, colour, size } = this.state;   
-    debugger
-    //console.log(formValues); 
-    // this.setState({
-    //   id: null,
-    //   product_id: product_id,
-    //   name: name,
-    //   description: description,      
-    //   colour: colour,
-    //   size: size,
-    //   });
+    const { product_id, name, description, colour, size } = this.state; 
     
     this.props
       .createProduct({ product_id, name, description, colour, size })
@@ -93,7 +54,18 @@ class AddProduct extends Component {
           colour: data.colour,
           size: data.size,
         });
-        console.log(data);
+        confirmAlert({
+            title: 'Product has been saved successfully!',
+            message: data.name,
+            buttons: [
+              {
+                label: 'OK',
+                onClick: () => this.props.router.navigate('/products')
+              }
+            ],
+            closeOnEscape: false,
+            closeOnClickOutside: false,
+            });
       })
       .catch((e) => {
         console.log(e);
@@ -106,7 +78,6 @@ class AddProduct extends Component {
         [name]: value,        
         });
     }
-
 render() {
     //const [formValues, setFormValues] = useState(this.state);
     return (
@@ -120,8 +91,6 @@ render() {
                     label="Product ID"
                     type="text"
                     margin="dense"
-                    validators={['required']}
-                    errorMessages={['this field is required']}                    
                     onChange={this.handleInputChange}/>
                     </Grid>
                 <Grid item>
@@ -179,7 +148,7 @@ render() {
                             backgroundColor: "green",
                             margin: "5px"
                         }}>
-                            Submit
+                            Save Product
                         </Button>
                     </Grid>                                                     
             </Grid>
@@ -189,4 +158,4 @@ render() {
   }
 }
 
-export default connect(null, { createProduct })(AddProduct);
+export default connect(null, { createProduct })(withRouter(AddProduct));
