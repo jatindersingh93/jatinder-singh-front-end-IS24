@@ -77,32 +77,32 @@ class ProductsList extends Component {
       // Accessible table to list data in tabular form
       <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="Product list">
-        <TableHead>
+        <TableHead class="table-header">
           <TableRow>
-            <TableCell>Product ID</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Description</TableCell>
-            <TableCell align="right">Colour</TableCell>
-            <TableCell align="right">Size</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <TableCell >Product ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>Colour</TableCell>
+            <TableCell>Size</TableCell>
+            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {products.map((product, index) => (
             <TableRow key={product.name}>
-              <TableCell align="right" 
+              <TableCell 
                 onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.product_id}</TableCell>                  
               <TableCell component="th" scope="row"
                 onClick={() => this.props.router.navigate('/products/' + product.id)}>
                 {product.name}
               </TableCell>
-              <TableCell align="right"
+              <TableCell
                 onClick={() => this.props.router.navigate('/products/' + product.id)}>{ truncate(product.description) }</TableCell> 
-              <TableCell align="right"
+              <TableCell
                 onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.colour}</TableCell>
-              <TableCell align="right"
+              <TableCell
                 onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.size}</TableCell>
-              <TableCell align="right">  
+              <TableCell>  
                 <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
                   <DeleteIcon />
                 </IconButton>

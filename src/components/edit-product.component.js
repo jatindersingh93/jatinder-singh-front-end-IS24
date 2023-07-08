@@ -57,7 +57,7 @@ updateCurrentProduct(event) {
     this.props
       .updateProduct({ id: id, data: this.state })
       .unwrap()
-      .then((data) => {debugger
+      .then((data) => {
         this.setState({
           id: data.id,
           product_id: data.product_id,

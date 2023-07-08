@@ -1,4 +1,23 @@
 h1 {
     font-size: 1em;
     font-weight: bold;
-}
+    }
+
+.container td {
+    font-size: 1em;
+    }
+.navbar-nav {
+    margin-right: 5%;
+    font-size: 1.2em;
+    }
+.table-header tr th {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: left;
+    color: #fff;
+    background-color: rgb(73, 73, 73);
+    }
+
+tr:nth-child(even) {
+    background: #dcdcdc
+    }

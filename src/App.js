@@ -19,7 +19,7 @@ class App extends Component {
           <Link to={"/products"} className="navbar-brand">
             Products List
           </Link>
-          <div className="navbar-nav mr-auto">
+          <div className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link to={"/products"} className="nav-link">
                 Products
