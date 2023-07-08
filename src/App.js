@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import ProductsList from './components/ProductsList.component'
+import ProductsList from './components/ProductsList.component';
 import AddProduct from "./components/add-product.component";
+import DetailProduct from "./components/detail-product.component";
 
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<ProductsList/>} />
             <Route path="/products" element={<ProductsList/>} />
+            <Route path="/products/:id" element={<DetailProduct/>} />
             <Route path="/add" element={<AddProduct/>} />
           </Routes>
         </div>        

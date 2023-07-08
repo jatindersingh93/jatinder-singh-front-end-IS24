@@ -11,6 +11,13 @@ export const retrieveProducts = createAsyncThunk(
     }
   );
 
+export const getProduct = createAsyncThunk(
+    "products/get",
+    async ({ id }) => {
+      await ProductsDataService.get(id);
+      return { id };
+    }
+  ); 
 export const createProduct = createAsyncThunk(
     "products/create",
     async ({ product_id, name, description, colour, size }) => {
@@ -33,12 +40,16 @@ const ProductSlice = createSlice({
     extraReducers: {
       [retrieveProducts.fulfilled]: (state, action) => {
         return [...action.payload];
-      }
-    },
-    [deleteProduct.fulfilled]: (state, action) => {
-      let index = state.findIndex(({ id }) => id === action.payload.id);
-      state.splice(index, 1);
-    },        
+      },
+      [deleteProduct.fulfilled]: (state, action) => {
+        let index = state.findIndex(({ id }) => id === action.payload.id);
+        state.splice(index, 1);
+      },    
+      [getProduct.fulfilled]: (state, action) => {
+        let index = state.findIndex(({ id }) => id === action.payload.id);
+        state.splice(index, 1);
+      },        
+    },  
   });
 
 const { reducer } = ProductSlice;

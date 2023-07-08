@@ -14,7 +14,6 @@ import {
     Grid,
     InputLabel
 } from '@mui/material';
-//import asyncValidate from './asyncValidate'
 
 import { 
     retrieveProducts, 
@@ -68,94 +67,94 @@ class AddProduct extends Component {
             });
       })
       .catch((e) => {
+        alert(e.message);
         console.log(e);
-      });      
+        });      
     }
   // Handle input change and set values for state data
-  handleInputChange(e) {//debugger
+  handleInputChange(e) {
     const { name, value } = e.target;
     this.setState({
         [name]: value,        
         });
     }
-render() {
-    //const [formValues, setFormValues] = useState(this.state);
-    return (
-        <>
-        <form onSubmit={this.newProduct}>
-            <Grid container alignItems="center" justify="center" direction="column" >
-                <Grid item>
-                  <TextField
-                    id="product_id"
-                    name="product_id"
-                    label="Product ID"
-                    type="text"
-                    margin="dense"
-                    onChange={this.handleInputChange}/>
-                    </Grid>
-                <Grid item>
+    render() {
+        return (
+            <>
+            <form onSubmit={this.newProduct}>
+                <Grid container alignItems="center" justify="center" direction="column" >
+                    <Grid item>
                     <TextField
-                      id="name"
-                      name="name"
-                      label="Name"
-                      type="text"
-                      margin="dense"
-                      onChange={this.handleInputChange}/>
-                    </Grid>
-                <Grid item>
-                    <TextField
-                      id="description"
-                      name="description"
-                      label="Description"
-                      type="text"
-                      margin="dense"
-                      multiline
-                      minRows={4}
-                      maxRows={8}                      
-                      onChange={this.handleInputChange}/>
-                    </Grid>
-                <Grid item>
-                    <TextField
-                      id="colour"
-                      name="colour"
-                      label="Colour"
-                      type="text"
-                      margin="dense"
-                      onChange={this.handleInputChange}/>
-                    </Grid>                    
-                <Grid item>
-                    <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
-                        <Select
-                            value={1}
-                            name="size"
-                            margin="dense"
-                            onChange={this.handleInputChange}>
-                            <MenuItem key="small" value={1}>
-                                Small
-                            </MenuItem>
-                            <MenuItem key="medium" value={2}>
-                                Medium
-                            </MenuItem>
-                            <MenuItem key="large" value={3}>
-                                Large
-                            </MenuItem>
-                            </Select>                     
-                        </FormControl>
-                    </Grid>
-                <Grid item>
-                    <Button variant="contained" color="primary" 
-                            type="submit" style={{
-                            backgroundColor: "green",
-                            margin: "5px"
-                        }}>
-                            Save Product
-                        </Button>
-                    </Grid>                                                     
-            </Grid>
-        </form>
-        </>
-    );
-  }
-}
+                        id="product_id"
+                        name="product_id"
+                        label="Product ID"
+                        type="text"
+                        margin="dense"
+                        onChange={this.handleInputChange}/>
+                        </Grid>
+                    <Grid item>
+                        <TextField
+                        id="name"
+                        name="name"
+                        label="Name"
+                        type="text"
+                        margin="dense"
+                        onChange={this.handleInputChange}/>
+                        </Grid>
+                    <Grid item>
+                        <TextField
+                        id="description"
+                        name="description"
+                        label="Description"
+                        type="text"
+                        margin="dense"
+                        multiline
+                        minRows={4}
+                        maxRows={8}                      
+                        onChange={this.handleInputChange}/>
+                        </Grid>
+                    <Grid item>
+                        <TextField
+                        id="colour"
+                        name="colour"
+                        label="Colour"
+                        type="text"
+                        margin="dense"
+                        onChange={this.handleInputChange}/>
+                        </Grid>                    
+                    <Grid item>
+                        <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
+                            <Select
+                                value={1}
+                                name="size"
+                                margin="dense"
+                                onChange={this.handleInputChange}>
+                                <MenuItem key="small" value={1}>
+                                    Small
+                                </MenuItem>
+                                <MenuItem key="medium" value={2}>
+                                    Medium
+                                </MenuItem>
+                                <MenuItem key="large" value={3}>
+                                    Large
+                                </MenuItem>
+                                </Select>                     
+                            </FormControl>
+                        </Grid>
+                    <Grid item>
+                        <Button variant="contained" color="primary" 
+                                type="submit" style={{
+                                backgroundColor: "green",
+                                margin: "5px"
+                            }}>
+                                Save Product
+                            </Button>
+                        </Grid>                                                     
+                </Grid>
+            </form>
+            </>
+            );
+        }
+    }
 
 export default connect(null, { createProduct })(withRouter(AddProduct));

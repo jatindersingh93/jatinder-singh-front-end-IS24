@@ -90,13 +90,18 @@ class ProductsList extends Component {
         <TableBody>
           {products.map((product, index) => (
             <TableRow key={product.name}>
-              <TableCell align="right">{product.product_id}</TableCell>                  
-              <TableCell component="th" scope="row">
+              <TableCell align="right" 
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.product_id}</TableCell>                  
+              <TableCell component="th" scope="row"
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>
                 {product.name}
               </TableCell>
-              <TableCell align="right">{ truncate(product.description) }</TableCell> 
-              <TableCell align="right">{product.colour}</TableCell>
-              <TableCell align="right">{product.size}</TableCell>
+              <TableCell align="right"
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>{ truncate(product.description) }</TableCell> 
+              <TableCell align="right"
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.colour}</TableCell>
+              <TableCell align="right"
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.size}</TableCell>
               <TableCell align="right">  
                 <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
                   <DeleteIcon />

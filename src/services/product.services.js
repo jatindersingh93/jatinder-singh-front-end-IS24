@@ -5,12 +5,11 @@ class ProductsDataService {
     return http.get("/products");
     }
 
-  get(id) {
+  get(id) {    
     return http.get(`/products/${id}`);
     }
 
   create(data) {
-    debugger
     return http.post("/products", data);
     }
 
