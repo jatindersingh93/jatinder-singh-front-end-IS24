@@ -36,7 +36,7 @@ class ProductsList extends Component {
   // Confirmation box before deleting a product
   confirmDelete = (product, index) => {
     confirmAlert({
-      title: 'Are you sure to delete product',
+      title: 'Are you sure to delete the product:',
       message: product.name,
       buttons: [
         {
@@ -66,8 +66,8 @@ class ProductsList extends Component {
     }
 
   // Product edit navigation button
-  editProduct(product, index) {
-    this.props.router.navigate('/add');
+  editProduct(product) {
+    this.props.router.navigate('/product/edit/' + product);
     }
 
 
@@ -106,7 +106,7 @@ class ProductsList extends Component {
                 <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
                   <DeleteIcon />
                 </IconButton>
-                <IconButton aria-label="edit" color="primary" onClick={() => this.editProduct(product, index)}>
+                <IconButton aria-label="edit" color="primary" onClick={() => this.editProduct(product.id)}>
                   <EditIcon />
                 </IconButton>                    
                                                 

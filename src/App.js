@@ -5,7 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import ProductsList from './components/ProductsList.component';
 import AddProduct from "./components/add-product.component";
+import EditProduct from "./components/edit-product.component";
 import DetailProduct from "./components/detail-product.component";
+
+import "./css/styles.css";
 
 
 class App extends Component {
@@ -35,6 +38,7 @@ class App extends Component {
             <Route path="/products" element={<ProductsList/>} />
             <Route path="/products/:id" element={<DetailProduct/>} />
             <Route path="/add" element={<AddProduct/>} />
+            <Route path="/product/edit/:id" element={<EditProduct/>} />
           </Routes>
         </div>        
       </Router>

@@ -61,7 +61,7 @@ class DetailProduct extends Component {
   // Confirmation box before deleting a product
   confirmDelete = (product) => {
     confirmAlert({
-      title: 'Are you sure to delete product',
+      title: 'Are you sure to delete the product:',
       message: product.name,
       buttons: [
         {
@@ -93,8 +93,8 @@ class DetailProduct extends Component {
     }
 
   // Product edit navigation button
-  editProduct(product, index) {
-    this.props.router.navigate('/add');
+  editProduct(product) {
+    this.props.router.navigate('/product/edit/' + product);
     }
 
 
@@ -141,7 +141,9 @@ class DetailProduct extends Component {
                         type="submit" style={{
                         backgroundColor: "gray",
                         margin: "5px"
-                    }}>
+                    }}
+                    onClick={() => this.editProduct(currentProduct.id)}
+                    >
                         Edit Product
                 </Button>            
         </div>          

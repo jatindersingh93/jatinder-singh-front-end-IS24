@@ -25,7 +25,13 @@ export const createProduct = createAsyncThunk(
       return res.data;
     }
   );
-
+export const updateProduct = createAsyncThunk(
+  "product/update",
+  async ({ id, data }) => {
+    const res = await ProductsDataService.update(id, data);
+    return res.data;
+    }
+  );
 export const deleteProduct = createAsyncThunk(
     "products/delete",
     async ({ id }) => {
@@ -48,7 +54,14 @@ const ProductSlice = createSlice({
       [getProduct.fulfilled]: (state, action) => {
         let index = state.findIndex(({ id }) => id === action.payload.id);
         state.splice(index, 1);
-      },        
+      },  
+      [updateProduct.fulfilled]: (state, action) => {
+        const index = state.findIndex(product => product.id === action.payload.id);
+        state[index] = {
+          ...state[index],
+          ...action.payload,
+        };
+      },                  
     },  
   });
 
