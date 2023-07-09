@@ -76,7 +76,7 @@ class ProductsList extends Component {
     return (
       // Accessible table to list data in tabular form
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="Product list">
+      <Table class="product-list" sx={{ minWidth: 650 }} aria-label="Product list">
         <TableHead class="table-header">
           <TableRow>
             <TableCell >Product ID</TableCell>
@@ -101,7 +101,7 @@ class ProductsList extends Component {
               <TableCell
                 onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.colour}</TableCell>
               <TableCell
-                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.size}</TableCell>
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.size_display}</TableCell>
               <TableCell>  
                 <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
                   <DeleteIcon />

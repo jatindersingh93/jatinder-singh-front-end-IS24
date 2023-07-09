@@ -26,13 +26,13 @@ class EditProduct extends Component {
     this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
-
             id: null,
             product_id: "",
             name: "",
             description: "",
             colour: "",
-            size: undefined,
+            size: "",
+            size_display: "",
         };
     }
 
@@ -53,7 +53,7 @@ componentDidMount() {
 
 updateCurrentProduct(event) {
     event.preventDefault();
-    const { id, product_id, name, description, colour, size } = this.state; 
+    const { id, product_id, name, description, colour, size, size_display } = this.state; 
     this.props
       .updateProduct({ id: id, data: this.state })
       .unwrap()
@@ -65,6 +65,7 @@ updateCurrentProduct(event) {
           description: data.publdescriptionshed,
           colour: data.colour,
           size: data.size,
+          size_display: data.size_display,
         });
         confirmAlert({
             title: 'Product has been saved successfully!',
@@ -159,13 +160,13 @@ updateCurrentProduct(event) {
                                 name="size"
                                 margin="dense"
                                 onChange={this.handleInputChange}>
-                                <MenuItem key="small" value={1}>
+                                <MenuItem key="Small" value={1}>
                                     Small
                                 </MenuItem>
-                                <MenuItem key="medium" value={2}>
+                                <MenuItem key="Medium" value={2}>
                                     Medium
                                 </MenuItem>
-                                <MenuItem key="large" value={3}>
+                                <MenuItem key="Large" value={3}>
                                     Large
                                 </MenuItem>
                                 </Select>                     

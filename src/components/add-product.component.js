@@ -33,16 +33,17 @@ class AddProduct extends Component {
       name: "",
       description: "",
       colour: "",
-      size: undefined,
+      size: 1,
+      size_display: ""
       };
     }
 
   newProduct(event) {
     event.preventDefault();
-    const { product_id, name, description, colour, size } = this.state; 
+    const { product_id, name, description, colour, size, size_display } = this.state; 
     
     this.props
-      .createProduct({ product_id, name, description, colour, size })
+      .createProduct({ product_id, name, description, colour, size, size_display })
       .unwrap()
       .then((data) => {
         this.setState({
@@ -52,6 +53,7 @@ class AddProduct extends Component {
           description: data.publdescriptionshed,
           colour: data.colour,
           size: data.size,
+          size_display: data.size_display,
         });
         confirmAlert({
             title: 'Product has been saved successfully!',
@@ -79,6 +81,7 @@ class AddProduct extends Component {
         });
     }
     render() {
+        const currentProduct = this.state;
         return (
             <>
             <form onSubmit={this.newProduct}>
@@ -125,20 +128,22 @@ class AddProduct extends Component {
                     <Grid item>
                         <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
                             <Select
-                                value={1}
+                                value={
+                                    currentProduct.size ? currentProduct.size : "1"
+                                    }
                                 name="size"
                                 margin="dense"
                                 onChange={this.handleInputChange}>
-                                <MenuItem key="small" value={1}>
+                                <MenuItem key="Small" value={"1"}>
                                     Small
                                 </MenuItem>
-                                <MenuItem key="medium" value={2}>
+                                <MenuItem key="Medium" value={"2"}>
                                     Medium
                                 </MenuItem>
-                                <MenuItem key="large" value={3}>
+                                <MenuItem key="Large" value={"3"}>
                                     Large
                                 </MenuItem>
-                                </Select>                     
+                                </Select>                        
                             </FormControl>
                         </Grid>
                     <Grid item>
