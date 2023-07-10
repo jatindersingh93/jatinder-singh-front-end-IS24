@@ -59,14 +59,14 @@ class DetailProduct extends Component {
     }
   
   // Confirmation box before deleting a product
-  confirmDelete = (product) => {
+  confirmDelete = (id, name) => {
     confirmAlert({
       title: 'Are you sure to delete the product:',
-      message: product.name,
+      message: name,
       buttons: [
         {
           label: 'Yes',
-          onClick: () => this.removeProduct(product.id)
+          onClick: () => this.removeProduct(id)
         },
         {
           label: 'No',
@@ -79,12 +79,10 @@ class DetailProduct extends Component {
     }
 
   // Remove product based on id: provided and fetch new data 
-  removeProduct(id){    
-
+  removeProduct(id){
     this.props
       .deleteProduct({id: id})
       .then(() => {
-        //alert('Delete was successful!');
         this.props.router.navigate('/products')
       })
       .catch((e) => {
@@ -121,7 +119,7 @@ class DetailProduct extends Component {
                     </TableRow>
                     <TableRow>
                     <TableCell variant="head">Size</TableCell>
-                    <TableCell align="right">{currentProduct.size}</TableCell>
+                    <TableCell align="right">{currentProduct.size_display}</TableCell>
                     </TableRow>                                                         
                 </TableBody>
                 </Table>
@@ -132,7 +130,7 @@ class DetailProduct extends Component {
                         backgroundColor: "gray",
                         margin: "5px"
                     }} 
-                    onClick={() => this.confirmDelete(currentProduct.id)}>
+                    onClick={() => this.confirmDelete(currentProduct.id, currentProduct.name)}>
                         Delete Product
                 </Button>            
         </div>  
