@@ -1,5 +1,8 @@
 import http from "../http-common";
 
+/* 
+  This will create a data service call to perform CRUD operation on product list 
+*/
 class ProductsDataService {
   getAll() {
     return http.get("/products");

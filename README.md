@@ -1,3 +1,31 @@
+# Introduction
+This code generates the front end for CRUD task on proudcts list provided by Django Back End app. 
+
+- It runs using React 18, React Redux toolkit and `axios` to make RestAPI calls.
+
+- Three components call async Thunks which uses ProductsDataService to call REST APIs.
+    - `AddEditProduct` - Perform Add and Edit using material form submission
+    - `DetailProduct`  - Product Detailed view with delete and edit buttons
+    - `ProductsList`   - List view of products with delete and edit buttons
+
+- `http-common.js` - initializes axios with HTTP requests to apis
+- `store.js` - Redux store instance is created with products reducer.
+- `Slices` - actions and reducer for features are defined 
+
+
+# Technology
+- React@18.0
+- react-redux@8.1.1
+- redux-toolkkit@1.1.2
+- react-router-dom@6.14.1
+- axios@1.4.0
+- bootstrap@5.3
+
+
+# Docker
+Dockerfile is used by docker-composer to self containerize the app and work along with backend and database.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

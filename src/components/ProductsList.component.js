@@ -20,6 +20,8 @@ import { withRouter } from '../common/with-router'; //hack to support navigate i
 
 // render all product lists in a table view
 class ProductsList extends Component {
+
+
   constructor(props) {
     super(props);    
     this.confirmDelete = this.confirmDelete.bind(this);
@@ -28,11 +30,13 @@ class ProductsList extends Component {
     this.removeProduct = this.removeProduct.bind(this);
     }
 
+
   componentDidMount() {
     this.props
       .retrieveProducts();
     }
  
+
   // Confirmation box before deleting a product
   confirmDelete = (product, index) => {
     confirmAlert({
@@ -53,6 +57,7 @@ class ProductsList extends Component {
       });
     }
 
+
   // Remove product based on id: provided and fetch new data 
   removeProduct(id){    
     this.props
@@ -61,9 +66,10 @@ class ProductsList extends Component {
         this.props.retrieveProducts();
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e); // Log out for test reasons
       });
     }
+
 
   // Product edit navigation button
   editProduct(product) {
@@ -113,12 +119,14 @@ class ProductsList extends Component {
               </TableCell>
             </TableRow>
           ))}
-        </TableBody>
-      </Table>
-      </TableContainer>        
-      );
-    }  
-  }
+          </TableBody>
+        </Table>
+        </TableContainer>        
+        );
+      }  
+    }
+
+// Map connect Redux state to the react component's props using connect
 const mapStateToProps = (state) => {
   return {
     products: state.products,

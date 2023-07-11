@@ -2,27 +2,35 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ProductsDataService from "../services/product.services";
 
 const initialState = [];
-
+/**
+ *  Redux reducer logic and actions for single feature using Redux toolkit
+ *  - retrieveProducts
+ *  - getProduct
+ *  - createProduct
+ *  - updateProduct
+ *  - deleteProduct
+ * 
+ */
 export const retrieveProducts = createAsyncThunk(
-    "products/retrieve",
-    async () => {
-      const res = await ProductsDataService.getAll();
-      return res.data;
+  "products/retrieve",
+  async () => {
+    const res = await ProductsDataService.getAll();
+    return res.data;
     }
   );
 
 export const getProduct = createAsyncThunk(
-    "products/get",
-    async ({ id }) => {
-      await ProductsDataService.get(id);
-      return { id };
+  "products/get",
+  async ({ id }) => {
+    await ProductsDataService.get(id);
+    return { id };
     }
   ); 
 export const createProduct = createAsyncThunk(
-    "products/create",
-    async ({ product_id, name, description, colour, size }) => {
-      const res = await ProductsDataService.create({ product_id, name, description, colour, size });
-      return res.data;
+  "products/create",
+  async ({ product_id, name, description, colour, size }) => {
+    const res = await ProductsDataService.create({ product_id, name, description, colour, size });
+    return res.data;
     }
   );
 export const updateProduct = createAsyncThunk(
@@ -33,34 +41,34 @@ export const updateProduct = createAsyncThunk(
     }
   );
 export const deleteProduct = createAsyncThunk(
-    "products/delete",
-    async ({ id }) => {
-      await ProductsDataService.delete(id);
-      return { id };
+  "products/delete",
+  async ({ id }) => {
+    await ProductsDataService.delete(id);
+    return { id };
     }
   );    
 
 const ProductSlice = createSlice({
-    name: "products",
-    initialState,
-    extraReducers: {
-      [retrieveProducts.fulfilled]: (state, action) => {
-        return [...action.payload];
-      },
-      [deleteProduct.fulfilled]: (state, action) => {
-        let index = state.findIndex(({ id }) => id === action.payload.id);
-        state.splice(index, 1);
-      },    
-      [getProduct.fulfilled]: (state, action) => {
-        let index = state.findIndex(({ id }) => id === action.payload.id);
-        state.splice(index, 1);
-      },  
-      [updateProduct.fulfilled]: (state, action) => {
-        const index = state.findIndex(product => product.id === action.payload.id);
-        state[index] = {
-          ...state[index],
-          ...action.payload,
-        };
+  name: "products",
+  initialState,
+  extraReducers: {  // add async reducers here
+    [retrieveProducts.fulfilled]: (state, action) => {
+      return [...action.payload];
+    },
+    [deleteProduct.fulfilled]: (state, action) => {
+      let index = state.findIndex(({ id }) => id === action.payload.id);
+      state.splice(index, 1);
+    },    
+    [getProduct.fulfilled]: (state, action) => {
+      let index = state.findIndex(({ id }) => id === action.payload.id);
+      state.splice(index, 1);
+    },  
+    [updateProduct.fulfilled]: (state, action) => {
+      const index = state.findIndex(product => product.id === action.payload.id);
+      state[index] = {
+        ...state[index],
+        ...action.payload,
+      };
       },                  
     },  
   });

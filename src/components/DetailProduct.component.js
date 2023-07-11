@@ -15,7 +15,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import {
     Button,
-} from '@mui/material';
+    } from '@mui/material';
 
 import { deleteProduct, getProduct} from "../slices/products"; // data apis
 import { truncate } from "../common/utils";   //truncate text
@@ -43,6 +43,7 @@ class DetailProduct extends Component {
         };
     }
 
+
   componentDidMount() {
     this.props
       .getProduct({id: this.props.router.params.id});
@@ -57,6 +58,7 @@ class DetailProduct extends Component {
         console.log(e);
       });
     }
+  
   
   // Confirmation box before deleting a product
   confirmDelete = (id, name) => {
@@ -78,6 +80,7 @@ class DetailProduct extends Component {
       });
     }
 
+
   // Remove product based on id: provided and fetch new data 
   removeProduct(id){
     this.props
@@ -90,16 +93,17 @@ class DetailProduct extends Component {
       });
     }
 
-  // Product edit navigation button
+
+  // Product edit navigation button redirect to the products edit page
   editProduct(product) {
     this.props.router.navigate('/product/edit/' + product);
     }
 
-
+  
+  // Render the Details product view using accessible table format
   render() {   
     const { product } = this.props;  
     const { currentProduct } = this.state;
-    //
     return (
         <>
         <TableContainer component={Paper}>
@@ -124,17 +128,17 @@ class DetailProduct extends Component {
                 </TableBody>
                 </Table>
             </TableContainer>  
-        <div>
+            <div>
             <Button disabled={!currentProduct.product_id} variant="contained" color="primary" 
                         type="submit" style={{
                         backgroundColor: "gray",
                         margin: "5px"
                     }} 
                     onClick={() => this.confirmDelete(currentProduct.id, currentProduct.name)}>
-                        Delete Product
+                    Delete Product
                 </Button>            
-        </div>  
-        <div>
+            </div>  
+            <div>
             <Button disabled={!currentProduct.product_id} variant="contained" color="primary" 
                         type="submit" style={{
                         backgroundColor: "gray",
@@ -142,7 +146,7 @@ class DetailProduct extends Component {
                     }}
                     onClick={() => this.editProduct(currentProduct.id)}
                     >
-                        Edit Product
+                    Edit Product
                 </Button>            
         </div>          
         </>

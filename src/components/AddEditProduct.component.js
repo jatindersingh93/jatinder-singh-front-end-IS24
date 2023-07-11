@@ -9,22 +9,28 @@ import {
     Button,
     MenuItem,
     Grid,
-} from '@mui/material';
+    } from '@mui/material';
 
 import { 
     getProduct, 
     updateProduct,
-    createProduct } from "../slices/products"; // data apis
+    createProduct 
+    } from "../slices/products"; // data apis
 
 import { withRouter } from '../common/with-router'; //hack to support navigate issue
 import ProductsDataService from "../services/product.services";
-
+/**
+ * This class add new products and edit existing if id is provided.
+ * 
+ */
 class AddEditProduct extends Component {
+
   constructor(props) {
     super(props);
     this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
     this.newProduct = this.newProduct.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    // capture the state change
     this.state = {
             id: null,
             product_id: null,
@@ -34,6 +40,7 @@ class AddEditProduct extends Component {
             size: "1"
         };
     }
+
 
 componentDidMount() {
     if (this.props.router.params.id){
@@ -51,6 +58,9 @@ componentDidMount() {
             });
         }
     }
+
+
+// Add new product to the product list
 newProduct(event) {
     event.preventDefault();
     const { product_id, name, description, colour, size, size_display } = this.state; 
@@ -86,6 +96,9 @@ newProduct(event) {
         console.log(e);
         });      
     }
+
+
+// Perform update current or existing product
 updateCurrentProduct(event) {
     event.preventDefault();
     const { id, product_id, name, description, colour, size, size_display } = this.state; 
@@ -120,14 +133,18 @@ updateCurrentProduct(event) {
         console.log(e);
         });      
     }
-  // Handle input change and set values for state data
+
+
+// Handle input change and set values for state data
 handleInputChange(e) {
     const { name, value } = e.target;
     this.setState({
             [name]: value,
         });
     }
-    
+
+
+// Render current state based on if product is present or new one requires to be entered
 render() {
     const currentProduct = this.state;    
     return (
@@ -219,7 +236,7 @@ render() {
         </form>
         </>
         );
+        }
     }
-}
 
 export default connect(null, { getProduct, updateProduct, createProduct })(withRouter(AddEditProduct));

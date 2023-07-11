@@ -29,8 +29,8 @@ class App extends Component {
                 Add
               </Link>
             </li>
-          </div>
-        </nav>
+            </div>
+          </nav>
         <div className="container mt-3">
           <Routes>
             <Route path="/" element={<ProductsList/>} />
@@ -38,9 +38,9 @@ class App extends Component {
             <Route path="/products/:id" element={<DetailProduct/>} />
             <Route path="/add" element={<AddEditProduct/>} />
             <Route path="/product/edit/:id" element={<AddEditProduct/>} />
-          </Routes>
-        </div>        
-      </Router>
+            </Routes>
+          </div>        
+        </Router>
       );
       }
     }

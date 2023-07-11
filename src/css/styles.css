@@ -3,13 +3,17 @@ h1 {
     font-weight: bold;
     }
 
+/* font size for all td text in container */
 .container td {
     font-size: 1em;
     }
+
 .navbar-nav {
     margin-right: 5%;
     font-size: 1.2em;
     }
+
+/* set table header styles */
 .table-header tr th {
     font-size: 1.2em;
     font-weight: bold;
@@ -17,6 +21,8 @@ h1 {
     color: #fff;
     background-color: rgb(73, 73, 73);
     }
+
+/* This will take care of the product list table formatting */    
 .product-list {
     width: 100%;
     }
