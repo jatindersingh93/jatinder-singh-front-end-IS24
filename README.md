@@ -26,13 +26,19 @@ This code generates the front end for CRUD task on proudcts list provided by Dja
 Dockerfile is used by docker-composer to self containerize the app and work along with backend and database.
 
 
-# Getting Started with Create React App
+# Local Installation/setup
+The first thing to do is to clone the repository:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```sh
+$ git clone https://github.com/jatindersingh93/jatinder-singh-front-end-IS24.git
+$ cd jatinder-singh-front-end-IS24
+```
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
 
 ### `npm start`
 
