@@ -23,3 +23,6 @@ h1 {
 .product-list tr:nth-child(even) {
     background: #dcdcdc
     }
+.product-list tr:hover {
+    background: #868686
+    }    

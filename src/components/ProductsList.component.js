@@ -76,8 +76,8 @@ class ProductsList extends Component {
     return (
       // Accessible table to list data in tabular form
       <TableContainer component={Paper}>
-      <Table class="product-list" sx={{ minWidth: 650 }} aria-label="Product list">
-        <TableHead class="table-header">
+      <Table className="product-list" sx={{ minWidth: 650 }} aria-label="Product list">
+        <TableHead className="table-header">
           <TableRow>
             <TableCell >Product ID</TableCell>
             <TableCell>Name</TableCell>

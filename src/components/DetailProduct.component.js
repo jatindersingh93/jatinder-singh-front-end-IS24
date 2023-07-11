@@ -34,7 +34,7 @@ class DetailProduct extends Component {
     this.state = {
         currentProduct: {
             id: null,
-            product_id: "",
+            product_id: null,
             name: "",
             description: "",
             colour: "",

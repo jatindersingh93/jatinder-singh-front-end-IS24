@@ -27,11 +27,11 @@ class AddEditProduct extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
             id: null,
-            product_id: "",
+            product_id: null,
             name: "",
             description: "",
             colour: "",
-            size: ""
+            size: "1"
         };
     }
 
@@ -189,7 +189,7 @@ render() {
                     <FormControl variant="filled" sx={{ m: 1, minWidth: 200 }}>
                         <Select
                             value={
-                                currentProduct.size ? currentProduct.size : 1
+                                currentProduct.size ? currentProduct.size : "1"
                                 }
                             name="size"
                             margin="dense"
