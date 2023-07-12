@@ -1,11 +1,11 @@
 FROM node:16-alpine
 
-WORKDIR /code/front-end/
+WORKDIR /code/front-end
 
-COPY package*.json /code/front-end/
+COPY . ./
 
-RUN npm install
+RUN npm ci 
 
-COPY . /code/front-end/
+RUN npm run build
 
-CMD ["npm", "start"]
+CMD [ "npx", "serve", "build" ]
