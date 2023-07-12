@@ -25,7 +25,6 @@ class ProductsList extends Component {
   constructor(props) {
     super(props);    
     this.confirmDelete = this.confirmDelete.bind(this);
-
     this.editProduct = this.editProduct.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
     }
@@ -64,10 +63,10 @@ class ProductsList extends Component {
       .deleteProduct({id: id})
       .then(() => {
         this.props.retrieveProducts();
-      })
-      .catch((e) => {
-        console.log(e); // Log out for test reasons
-      });
+        })
+        .catch((e) => {
+          console.log(e); // Log out for test reasons
+        });
     }
 
 
@@ -91,34 +90,36 @@ class ProductsList extends Component {
             <TableCell>Colour</TableCell>
             <TableCell>Size</TableCell>
             <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
+            </TableRow>
+          </TableHead>
         <TableBody>
           {products.map((product, index) => (
             <TableRow key={product.name}>
               <TableCell 
-                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.product_id}</TableCell>                  
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.product_id}
+                </TableCell>                  
               <TableCell component="th" scope="row"
                 onClick={() => this.props.router.navigate('/products/' + product.id)}>
                 {product.name}
-              </TableCell>
+                </TableCell>
               <TableCell
-                onClick={() => this.props.router.navigate('/products/' + product.id)}>{ truncate(product.description) }</TableCell> 
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>{ truncate(product.description) }
+                </TableCell> 
               <TableCell
                 onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.colour}</TableCell>
               <TableCell
-                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.size_display}</TableCell>
+                onClick={() => this.props.router.navigate('/products/' + product.id)}>{product.size_display}
+                </TableCell>
               <TableCell>  
                 <IconButton aria-label="delete" color="primary" onClick={() => this.confirmDelete(product, index)}>
                   <DeleteIcon />
-                </IconButton>
+                  </IconButton>
                 <IconButton aria-label="edit" color="primary" onClick={() => this.editProduct(product.id)}>
                   <EditIcon />
-                </IconButton>                    
-                                                
-              </TableCell>
-            </TableRow>
-          ))}
+                  </IconButton>                              
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
         </TableContainer>        

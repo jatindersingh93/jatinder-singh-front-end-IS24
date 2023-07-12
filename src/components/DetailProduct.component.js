@@ -52,11 +52,10 @@ class DetailProduct extends Component {
         this.setState({
             currentProduct: response.data,
         });
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
-      });
+        });
     }
   
   
@@ -87,10 +86,10 @@ class DetailProduct extends Component {
       .deleteProduct({id: id})
       .then(() => {
         this.props.router.navigate('/products')
-      })
+        })
       .catch((e) => {
         console.log(e);
-      });
+        });
     }
 
 
@@ -110,47 +109,48 @@ class DetailProduct extends Component {
             <Table sx={{ minWidth: 650 }} aria-label="Product list">
                 <TableBody>
                     <TableRow>
-                    <TableCell variant="head">Product ID</TableCell>
-                    <TableCell align="right">{currentProduct.product_id}</TableCell>
-                    </TableRow>
+                      <TableCell variant="head">Product ID</TableCell>
+                      <TableCell align="right">{currentProduct.product_id}</TableCell>
+                      </TableRow>
                     <TableRow>
-                    <TableCell variant="head">Description</TableCell>
-                    <TableCell align="right">{currentProduct.description}</TableCell>
-                    </TableRow>
+                      <TableCell variant="head">Description</TableCell>
+                      <TableCell align="right">{currentProduct.description}</TableCell>
+                      </TableRow>
                     <TableRow>
-                    <TableCell variant="head">Colour</TableCell>
-                    <TableCell align="right">{currentProduct.colour}</TableCell>
-                    </TableRow>
+                      <TableCell variant="head">Colour</TableCell>
+                      <TableCell align="right">{currentProduct.colour}</TableCell>
+                      </TableRow>
                     <TableRow>
-                    <TableCell variant="head">Size</TableCell>
-                    <TableCell align="right">{currentProduct.size_display}</TableCell>
-                    </TableRow>                                                         
-                </TableBody>
+                      <TableCell variant="head">Size</TableCell>
+                      <TableCell align="right">{currentProduct.size_display}</TableCell>
+                      </TableRow>                                                         
+                    </TableBody>
                 </Table>
             </TableContainer>  
             <div>
-            <Button disabled={!currentProduct.product_id} variant="contained" color="primary" 
-                        type="submit" style={{
-                        backgroundColor: "gray",
-                        margin: "5px"
-                    }} 
-                    onClick={() => this.confirmDelete(currentProduct.id, currentProduct.name)}>
-                    Delete Product
-                </Button>            
-            </div>  
+            <Button disabled={!currentProduct.product_id} 
+              variant="contained" color="primary" 
+              type="submit" style={{
+              backgroundColor: "gray",
+              margin: "5px"
+              }} 
+              onClick={() => this.confirmDelete(currentProduct.id, currentProduct.name)}>
+              Delete Product
+              </Button>            
+              </div>  
             <div>
-            <Button disabled={!currentProduct.product_id} variant="contained" color="primary" 
-                        type="submit" style={{
-                        backgroundColor: "gray",
-                        margin: "5px"
-                    }}
-                    onClick={() => this.editProduct(currentProduct.id)}
-                    >
-                    Edit Product
-                </Button>            
-        </div>          
-        </>
-      );
+            <Button disabled={!currentProduct.product_id} 
+              variant="contained" color="primary" 
+              type="submit" style={{
+              backgroundColor: "gray",
+              margin: "5px"
+              }}
+              onClick={() => this.editProduct(currentProduct.id)}>
+              Edit Product
+              </Button>            
+              </div>          
+            </>
+        );
     }  
   }
 

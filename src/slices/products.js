@@ -18,7 +18,6 @@ export const retrieveProducts = createAsyncThunk(
     return res.data;
     }
   );
-
 export const getProduct = createAsyncThunk(
   "products/get",
   async ({ id }) => {

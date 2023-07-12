@@ -9,7 +9,6 @@ import DetailProduct from "./components/DetailProduct.component";
 
 import "./css/styles.css";
 
-
 class App extends Component {
   render() {
     return (

@@ -69,32 +69,32 @@ newProduct(event) {
         .createProduct({ product_id, name, description, colour, size, size_display })
         .unwrap()
         .then((data) => {
-        this.setState({
-            id: data.id,
-            product_id: data.product_id,
-            name: data.name,
-            description: data.publdescriptionshed,
-            colour: data.colour,
-            size: data.size,
-            size_display: data.size_display,
-        });
-        confirmAlert({
-            title: 'Product has been saved successfully!',
-            message: data.name,
-            buttons: [
-                {
-                label: 'OK',
-                onClick: () => this.props.router.navigate('/products')
-                }
-            ],
-            closeOnEscape: false,
-            closeOnClickOutside: false,
-            });
-        })
-        .catch((e) => {
-        alert(e.message);
-        console.log(e);
-        });      
+            this.setState({
+                id: data.id,
+                product_id: data.product_id,
+                name: data.name,
+                description: data.publdescriptionshed,
+                colour: data.colour,
+                size: data.size,
+                size_display: data.size_display,
+                });
+            confirmAlert({
+                title: 'Product has been saved successfully!',
+                message: data.name,
+                buttons: [
+                    {
+                    label: 'OK',
+                    onClick: () => this.props.router.navigate('/products')
+                    }
+                ],
+                closeOnEscape: false,
+                closeOnClickOutside: false,
+                });
+            })
+            .catch((e) => {
+                alert(e.message);
+                console.log(e);
+                });      
     }
 
 
@@ -114,7 +114,7 @@ updateCurrentProduct(event) {
           colour: data.colour,
           size: data.size,
           size_display: data.size_display,
-        });
+          });
         confirmAlert({
             title: 'Product has been saved successfully!',
             message: data.name,
@@ -127,11 +127,11 @@ updateCurrentProduct(event) {
             closeOnEscape: false,
             closeOnClickOutside: false,
             });
-      })
-      .catch((e) => {
-        alert(e.message);
-        console.log(e);
-        });      
+        })
+        .catch((e) => {
+            alert(e.message);
+            console.log(e);
+            });      
     }
 
 
@@ -139,7 +139,7 @@ updateCurrentProduct(event) {
 handleInputChange(e) {
     const { name, value } = e.target;
     this.setState({
-            [name]: value,
+        [name]: value,
         });
     }
 

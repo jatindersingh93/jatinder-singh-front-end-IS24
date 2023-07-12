@@ -1,7 +1,7 @@
 # Introduction
 This code generates the front end for CRUD task on proudcts list provided by Django Back End app. 
 
-- It runs using React 18, React Redux toolkit and `axios` to make RestAPI calls.
+- It runs using `React 18`, `React Redux toolkit` and `axios` to make RestAPI calls.
 
 - Three components call async Thunks which uses ProductsDataService to call REST APIs.
     - `AddEditProduct` - Perform Add and Edit using material form submission
@@ -23,7 +23,7 @@ This code generates the front end for CRUD task on proudcts list provided by Dja
 
 
 # Docker
-Dockerfile is used by docker-composer to self containerize the app and work along with backend and database.
+Dockerfile is used by docker-composer to self containerize the app and works along with backend and database.
 
 
 # Local Installation/setup
@@ -40,7 +40,7 @@ In the project directory, you can run:
 
 ### `npm install`
 
-### `npm start`
+### `npm start` or ``
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
